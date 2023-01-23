@@ -1,0 +1,54 @@
+plugins {
+    id("groovy")
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("io.micronaut.application") version "3.7.0"
+    id("io.micronaut.test-resources") version "3.7.0"
+}
+
+version = "0.1"
+group = "com.swipejobs.challenge"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor('org.projectlombok:lombok')
+    annotationProcessor("io.micronaut:micronaut-http-validation")
+    annotationProcessor("io.micronaut.data:micronaut-data-document-processor")
+    implementation("io.micronaut:micronaut-http-client")
+    implementation("io.micronaut:micronaut-jackson-databind")
+    implementation("io.micronaut.data:micronaut-data-mongodb")
+    implementation("io.micronaut.mongodb:micronaut-mongo-sync")
+    implementation("jakarta.annotation:jakarta.annotation-api")
+    implementation("ch.qos.logback:logback-classic")
+    implementation("org.mongodb:mongodb-driver-sync")
+    implementation("io.micronaut:micronaut-validation")
+    testImplementation "org.testcontainers:spock:1.17.6"
+    testImplementation "org.testcontainers:mongodb:1.17.6"
+    testImplementation 'org.testcontainers:testcontainers:1.17.6'
+
+}
+
+
+application {
+    mainClass.set("com.swipejobs.challenge.JobMatchingApplication")
+}
+java {
+    sourceCompatibility = JavaVersion.toVersion("11")
+    targetCompatibility = JavaVersion.toVersion("11")
+}
+
+graalvmNative.toolchainDetection = false
+micronaut {
+    runtime("netty")
+    testRuntime("spock2")
+    processing {
+        incremental(true)
+        annotations("com.swipejobs.chellange.*")
+    }
+}
+
+
+

@@ -1,0 +1,22 @@
+micronaut:
+  application:
+    name: jobMatcher
+netty:
+  default:
+    allocator:
+      max-order: 3
+mongodb:
+  uri: mongodb://root:password@localhost:27017/admin
+  package-names:
+    - com.swipejobs.challenge.model
+jackson:
+  serialization:
+    indentOutput: true
+    writeDatesAsTimestamps: false
+  deserialization:
+    useBigIntegerForInts: true
+    failOnUnknownProperties: false
+matching:
+  workersUrl: https://test.swipejobs.com/api/workers
+  jobsUrl: https://test.swipejobs.com/api/jobs
+  matchCount: 3
